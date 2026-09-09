@@ -53,6 +53,8 @@ body{margin:0;font-family:var(--sans);font-weight:300;color:var(--ink);backgroun
 #btns button:hover{border-color:var(--line-2)}
 #btns button[aria-pressed="true"]{background:var(--acc);color:#fff;border-color:var(--acc)}
 #btns button:focus-visible{outline:2px solid #4E7BD6;outline-offset:2px}
+#btns button:disabled{opacity:.42;cursor:default}
+#btns button:disabled:hover{border-color:var(--line)}
 
 #rail{position:fixed;top:0;right:0;bottom:0;width:392px;z-index:6;background:var(--bg);
   border-left:1px solid var(--line);display:flex;flex-direction:column}
@@ -105,61 +107,6 @@ body{margin:0;font-family:var(--sans);font-weight:300;color:var(--ink);backgroun
 #railfoot b{color:var(--mut);font-weight:500}
 .pub{display:inline-block;font-size:10px;font-weight:500;color:#1B5E9E;background:#E7F0FA;border:1px solid #C9DDF2;border-radius:5px;padding:1px 6px;margin-right:5px}
 
-#banner{position:fixed;left:50%;top:96px;transform:translateX(-50%);z-index:16;display:flex;
-  align-items:center;gap:12px;background:#1C2942;color:#fff;padding:13px 16px;border-radius:12px;
-  box-shadow:0 8px 30px rgba(24,32,47,.28);font-size:13px;max-width:min(92vw,720px)}
-#banner[hidden]{display:none!important}
-#banner .ic{font-size:16px}
-#banner .tx{line-height:1.6}
-#banner .tx b{color:#FFD9A0;font-weight:500}
-#banner button{font:500 12.5px var(--sans);background:#fff;color:#1C2942;border:0;border-radius:8px;
-  padding:8px 13px;cursor:pointer;white-space:nowrap}
-#banner button.ghost{background:rgba(255,255,255,.14);color:#fff;font-weight:400}
-#banner button:hover{opacity:.88}
-#gate{position:fixed;inset:0;z-index:20;background:rgba(24,32,47,.42);display:grid;place-items:center;padding:24px}
-#gate[hidden]{display:none!important}
-#gate .card{position:relative}
-#gate .x{position:absolute;right:14px;top:12px;width:30px;height:30px;border:0;background:none;
-  font-size:22px;line-height:1;color:#9AA7BC;cursor:pointer;border-radius:8px}
-#gate .x:hover{background:#F1F4F9;color:#18202F}
-#btns button.base{background:#fff;border-color:#CFD7E5}
-#btns button.base b{font-weight:600;color:#18202F}
-#gate .card{max-width:560px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px 32px;
-  box-shadow:0 10px 40px rgba(24,32,47,.10)}
-#gate h2{font-family:var(--serif);font-size:20px;margin:0 0 10px}
-#gate p{font-size:13px;color:var(--ink-2);line-height:1.75;margin:0 0 14px}
-#gate ol{font-size:13px;color:var(--ink-2);line-height:1.9;padding-left:20px;margin:0 0 18px}
-#gate code{font-family:var(--mono);font-size:12px;background:var(--bg-2);padding:2px 6px;border-radius:4px}
-#gate .row{display:flex;gap:8px}
-#gate input{flex:1;font:400 13px var(--mono);padding:11px 13px;border:1px solid var(--line-2);border-radius:9px}
-#gate button{font:500 13px var(--sans);background:var(--acc);color:#fff;border:0;border-radius:9px;padding:11px 20px;cursor:pointer}
-#gate .err{color:#C0392B;font-size:12.5px;margin-top:12px;display:none;line-height:1.7;
-  background:#FDF2F0;border:1px solid #F3D2CC;border-radius:9px;padding:11px 13px}
-#gate .err b{color:#A93226}
-#gate .diag{background:var(--bg-2);border:1px solid var(--line);border-radius:10px;
-  padding:12px 14px;margin:0 0 16px}
-#gate .dl{font-size:11px;color:var(--faint);margin-bottom:3px}
-#gate .dv{font-family:var(--mono);font-size:12px;color:var(--ink-2);word-break:break-all;margin-bottom:9px}
-#gate .dv.strong{color:#1B5E9E;font-weight:500;font-size:13px;margin-bottom:0}
-#gate .dvrow{display:flex;align-items:center;gap:8px}
-#gate .dvrow .dv{flex:1;min-width:0}
-#gate #d-copy{font:400 11.5px var(--sans);background:#fff;color:var(--ink-2);border:1px solid var(--line-2);
-  border-radius:7px;padding:5px 10px;flex:0 0 auto}
-#gate .note{font-size:11.5px;color:var(--mut);margin-top:9px;line-height:1.6}
-#gate .clr{margin-top:10px;text-align:right}
-#gate #keyclear{background:none;color:var(--mut);font:400 11.5px var(--sans);
-  padding:4px 2px;text-decoration:underline}
-#gate .help{margin-top:16px;font-size:12.5px;color:var(--ink-2)}
-#gate .help summary{cursor:pointer;color:var(--mut);font-size:12px}
-#gate .help ol{margin-top:10px}
-#gate .warn{color:#B9770E}
-#hintbar{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:15;display:none;
-  background:#1C2942;color:#fff;font-size:12.5px;padding:11px 14px;border-radius:10px;
-  box-shadow:0 6px 24px rgba(24,32,47,.25);align-items:center;gap:10px}
-#hintbar b{font-family:var(--mono);font-weight:500;color:#FFD9A0}
-#hintbar button{font:400 11.5px var(--sans);background:rgba(255,255,255,.14);color:#fff;
-  border:0;border-radius:6px;padding:5px 10px;cursor:pointer;margin-left:2px}
-#hintbar button:hover{background:rgba(255,255,255,.24)}
 
 @media (max-width:1000px){
   /* 지도는 화면 전체를 쓰고, 점검 일정은 그 위에 덮이는 하단 시트로 둡니다.
@@ -202,13 +149,6 @@ body{margin:0;font-family:var(--sans);font-weight:300;color:var(--ink);backgroun
   #btns{flex-wrap:nowrap}
   #btns button{padding:9px 12px;flex:0 0 auto}
 
-  #banner{top:64px;bottom:auto;left:8px;right:8px;transform:none;max-width:none;
-    font-size:12.5px;padding:12px 14px;flex-wrap:wrap;gap:9px}
-  #banner .tx{flex:1 1 100%}
-  #banner button{flex:1 1 auto}
-
-  #gate .card{padding:22px 18px}
-  #gate .dv{font-size:11.5px}
   .stop{padding:10px 16px}
   .daygroup{padding:13px 16px 6px}
   .partrow{padding:10px 16px 5px}
@@ -226,7 +166,7 @@ body{margin:0;font-family:var(--sans);font-weight:300;color:var(--ink);backgroun
   <canvas id="cv"></canvas>
 
   <div id="brand">
-    <div class="eyebrow">Gwangjin-gu · Kakao Map</div>
+    <div class="eyebrow">Gwangjin-gu · OpenStreetMap</div>
     <h1>2026년 하반기 중대시민재해시설 점검 동선도</h1>
     <div class="sub">15개소 · 3일 · 오전/오후 순회 &nbsp;|&nbsp; 경로 : 카카오 길찾기 자동차 실제 경로</div>
   </div>
@@ -241,7 +181,6 @@ body{margin:0;font-family:var(--sans);font-weight:300;color:var(--ink);backgroun
       <button id="btn-3d" type="button" aria-pressed="true">3D 건물</button>
       <button id="btn-route" type="button" aria-pressed="true">이동동선</button>
       <button id="btn-play" type="button" aria-pressed="true">차량 이동</button>
-      <button id="btn-base" type="button" class="base">기반지도 : <b id="base-name">일반</b></button>
     </div>
   </div>
 </div>
@@ -259,46 +198,6 @@ body{margin:0;font-family:var(--sans);font-weight:300;color:var(--ink);backgroun
     <span class="pub">공개 배포용</span> 담당자 성명·휴대전화번호는 제외했습니다.
   </div>
 </aside>
-
-<div id="banner" hidden>
-  <span class="ic">🗺</span>
-  <span class="tx" id="banner-tx"></span>
-  <button id="banner-go" type="button">카카오맵으로 보기</button>
-  <button id="banner-x" type="button" class="ghost">이대로 볼게요</button>
-</div>
-
-<div id="gate" hidden>
-  <div class="card">
-    <button class="x" id="gate-x" type="button" aria-label="닫기">×</button>
-    <h2>카카오맵으로 보기</h2>
-    <p>카카오 지도는 <b>JavaScript 키</b>와 <b>도메인 등록</b>이 모두 맞아야 표시됩니다.
-       한 번 입력하면 이 브라우저에 저장됩니다.</p>
-
-    <div class="diag">
-      <div class="dl">지금 이 페이지 주소</div>
-      <div class="dv" id="d-url">-</div>
-      <div class="dl">카카오 개발자 콘솔 &gt; 플랫폼 &gt; Web &gt; 사이트 도메인에 등록할 값</div>
-      <div class="dvrow"><span class="dv strong" id="d-origin">-</span><button type="button" id="d-copy">복사</button></div>
-      <div class="note" id="d-note"></div>
-    </div>
-
-    <div class="row">
-      <input id="keyin" type="text" placeholder="JavaScript 키 (영문+숫자 32자)" autocomplete="off" spellcheck="false">
-      <button id="keygo" type="button">적용</button>
-    </div>
-    <div class="err" id="keyerr"></div>
-    <div class="clr"><button type="button" id="keyclear">저장된 키 지우기</button></div>
-
-    <details class="help">
-      <summary>키 발급 · 도메인 등록 방법</summary>
-      <ol>
-        <li><a href="https://developers.kakao.com/console/app" target="_blank" rel="noopener">developers.kakao.com</a> 로그인 → <b>애플리케이션 추가하기</b></li>
-        <li>앱 선택 → 좌측 <b>앱 키</b> → <b>JavaScript 키</b> 복사 <span class="warn">(REST API 키·네이티브 앱 키로는 지도가 열리지 않습니다)</span></li>
-        <li>좌측 <b>플랫폼</b> → <b>Web 플랫폼 등록</b> → 위 값을 사이트 도메인에 입력 → <b>저장</b></li>
-      </ol>
-    </details>
-  </div>
-</div>
 
 <script>
 var ROUTE_RAW={"d1am": "37.536284,127.087755;37.535616,127.087739;37.535560,127.087502;37.537150,127.086860;37.537232,127.086904;37.537390,127.087525;37.537600,127.087918;37.538519,127.091403;37.541157,127.095875;37.542677,127.094295;37.543206,127.095171;37.543308,127.095487;37.543396,127.096391;37.543479,127.096605;37.543825,127.097099;37.543988,127.097256;37.546391,127.098041;37.546932,127.098103;37.547185,127.098247;37.547302,127.098189;37.547338,127.098109;37.547264,127.097884;37.547234,127.097556;37.547348,127.097091;37.547659,127.096532;37.547773,127.096169;37.547889,127.096032;37.548025,127.096030;37.548150,127.095927;37.548696,127.094336;37.548791,127.093735;37.549081,127.092814;37.549479,127.091870;37.550390,127.090795;37.550883,127.090382;37.552409,127.089628;37.552964,127.089214;37.553420,127.088767;37.554104,127.088623;37.554247,127.088519;37.557747,127.087899;37.559611,127.087639;37.559659,127.088046;37.559227,127.088119;37.559064,127.088019;37.559322,127.087665;37.558881,127.087727;37.559136,127.086886;37.559640,127.086801;37.559856,127.086809;37.559599,127.087288;37.559322,127.087665;37.557747,127.087899;37.553977,127.088567;37.553373,127.088462;37.552926,127.088954;37.552317,127.089403;37.550665,127.090249;37.550361,127.090501;37.550057,127.090833;37.548549,127.089177;37.547791,127.090272;37.547391,127.089836;37.546809,127.089164;37.547166,127.088628;37.547594,127.088091;37.545222,127.085404;37.545086,127.085303;37.543983,127.084819;37.543043,127.084468;37.542084,127.084027;37.539987,127.083204;37.538312,127.083338;37.536566,127.083552;37.536698,127.084342;37.537284,127.086621;37.537222,127.086791;37.537150,127.086860;37.535560,127.087502;37.535616,127.087739;37.536284,127.087755", "d1pm": "37.536284,127.087755;37.535616,127.087739;37.535560,127.087502;37.537150,127.086860;37.537232,127.086904;37.537390,127.087525;37.537600,127.087918;37.538519,127.091403;37.541157,127.095875;37.542677,127.094295;37.543206,127.095171;37.543308,127.095487;37.543396,127.096391;37.543606,127.096819;37.543825,127.097099;37.544097,127.097311;37.545461,127.097747;37.545257,127.098259;37.545215,127.098633;37.545272,127.098949;37.545702,127.099883;37.545514,127.100010;37.545489,127.100270;37.545514,127.100010;37.545702,127.099883;37.545272,127.098949;37.545215,127.098633;37.545257,127.098259;37.545461,127.097747;37.544097,127.097311;37.543825,127.097099;37.543606,127.096819;37.543396,127.096391;37.543308,127.095487;37.543206,127.095171;37.542677,127.094295;37.541157,127.095875;37.541341,127.096337;37.541192,127.096882;37.541293,127.098239;37.541287,127.098691;37.541434,127.099040;37.541592,127.099751;37.542301,127.101644;37.542130,127.101770;37.539366,127.098443;37.539157,127.098264;37.538139,127.097088;37.537569,127.097955;37.536341,127.096499;37.537569,127.097955;37.538139,127.097088;37.536466,127.095162;37.536193,127.094724;37.536190,127.094385;37.536234,127.094283;37.536825,127.093744;37.536959,127.093561;37.537189,127.093106;37.535542,127.092096;37.535198,127.091930;37.534484,127.091690;37.533605,127.088589;37.533485,127.088308;37.535560,127.087502;37.535616,127.087739;37.536284,127.087755", "d2am": "37.536284,127.087755;37.535616,127.087739;37.535560,127.087502;37.533485,127.088308;37.533227,127.087485;37.532462,127.085378;37.530456,127.086874;37.530059,127.086867;37.528814,127.086622;37.528874,127.086214;37.528845,127.086034;37.528559,127.085098;37.528371,127.084127;37.529090,127.083915;37.528739,127.082810;37.529351,127.082712;37.531092,127.086402;37.530456,127.086874;37.530176,127.086877;37.530033,127.086924;37.529058,127.086744;37.528968,127.086767;37.528345,127.086617;37.528100,127.086416;37.527926,127.086045;37.527593,127.083786;37.527567,127.082689;37.527626,127.081048;37.527971,127.079007;37.528419,127.077610;37.529478,127.074689;37.530774,127.069921;37.530897,127.069603;37.531248,127.068343;37.532919,127.062076;37.533240,127.061597;37.534188,127.060691;37.534627,127.060357;37.534851,127.060253;37.535049,127.060239;37.535302,127.060315;37.536940,127.061154;37.539103,127.062372;37.539491,127.062424;37.546877,127.066666;37.554724,127.071084;37.554923,127.071228;37.554437,127.072411;37.555161,127.072832;37.555611,127.071604;37.558027,127.072955;37.558291,127.073235;37.558671,127.073491;37.559097,127.073712;37.559187,127.073688;37.559222,127.073563;37.559176,127.073462;37.558470,127.073052;37.558027,127.072955;37.556860,127.072325;37.554090,127.070718;37.546877,127.066666;37.542179,127.063963;37.540832,127.067963;37.540654,127.068192;37.540442,127.068726;37.539817,127.070578;37.539694,127.071066;37.539652,127.071418;37.539326,127.072417;37.538827,127.074178;37.538129,127.077117;37.536590,127.083167;37.536586,127.083801;37.537284,127.086621;37.537222,127.086791;37.537150,127.086860;37.535560,127.087502;37.535616,127.087739;37.536284,127.087755", "d2pm": "37.536284,127.087755;37.535616,127.087739;37.535560,127.087502;37.537150,127.086860;37.537232,127.086904;37.537390,127.087525;37.537600,127.087918;37.538204,127.090276;37.536698,127.084342;37.536586,127.083801;37.536564,127.083348;37.536913,127.081850;37.538129,127.077117;37.538827,127.074178;37.539326,127.072417;37.539652,127.071418;37.539838,127.071065;37.539970,127.070656;37.546889,127.073919;37.547287,127.074130;37.547931,127.074597;37.550583,127.076148;37.551948,127.076720;37.554390,127.077935;37.557051,127.079453;37.556186,127.081784;37.555656,127.083058;37.553519,127.081748;37.555656,127.083058;37.555170,127.084354;37.553862,127.087720;37.553373,127.088462;37.552926,127.088954;37.552317,127.089403;37.550665,127.090249;37.550361,127.090501;37.550057,127.090833;37.548549,127.089177;37.545876,127.086131;37.545222,127.085404;37.545086,127.085303;37.543983,127.084819;37.542518,127.084248;37.542084,127.084027;37.539987,127.083204;37.538312,127.083338;37.537187,127.083488;37.537088,127.083455;37.536879,127.083288;37.536779,127.083108;37.536704,127.082724;37.538129,127.077117;37.537211,127.080772;37.536922,127.080673;37.536492,127.079807;37.536473,127.079694;37.535941,127.079667;37.535744,127.079771;37.535175,127.079665;37.535041,127.079723;37.535310,127.080829;37.535013,127.080878;37.534318,127.081871;37.532737,127.080080;37.532356,127.079779;37.532021,127.079613;37.533927,127.073276;37.535330,127.068405;37.535801,127.066453;37.536510,127.063796;37.535859,127.063499;37.535544,127.064680;37.535545,127.064804;37.535637,127.064984;37.536263,127.064388;37.536362,127.064387;37.535801,127.066453;37.535278,127.068587;37.536697,127.069225;37.538506,127.070108;37.538904,127.070261;37.539030,127.070192;37.539138,127.070247;37.539646,127.070694;37.539692,127.070783;37.539694,127.071066;37.539652,127.071418;37.539326,127.072417;37.538827,127.074178;37.538129,127.077117;37.536590,127.083167;37.536586,127.083801;37.537284,127.086621;37.537222,127.086791;37.537150,127.086860;37.535560,127.087502;37.535616,127.087739;37.536284,127.087755", "d3am": "37.536284,127.087755;37.535616,127.087739;37.535560,127.087502;37.537150,127.086860;37.537232,127.086904;37.537390,127.087525;37.537600,127.087918;37.537898,127.089125;37.538114,127.089134;37.539251,127.089369;37.543340,127.090349;37.544694,127.090638;37.544807,127.090048;37.544847,127.089471;37.545360,127.080027;37.545445,127.079369;37.545889,127.077327;37.546997,127.075016;37.547287,127.074130;37.547803,127.072177;37.548042,127.070487;37.547760,127.072336;37.546757,127.072009;37.546735,127.071500;37.546348,127.071584;37.545944,127.071736;37.545692,127.070641;37.545934,127.070468;37.546571,127.070178;37.548042,127.070487;37.547803,127.072177;37.547138,127.074629;37.546997,127.075016;37.545889,127.077327;37.545479,127.079176;37.545360,127.080027;37.545234,127.082416;37.545117,127.082406;37.544330,127.082042;37.543750,127.083860;37.543280,127.083639;37.543043,127.084468;37.542084,127.084027;37.539987,127.083204;37.538312,127.083338;37.536566,127.083552;37.536698,127.084342;37.537284,127.086621;37.537222,127.086791;37.537150,127.086860;37.535560,127.087502;37.535616,127.087739;37.536284,127.087755", "d3pm": "37.536284,127.087755;37.535616,127.087739;37.535560,127.087502;37.533485,127.088308;37.533227,127.087485;37.532462,127.085378;37.531812,127.083961;37.531618,127.083409;37.531468,127.082641;37.531437,127.082110;37.531608,127.080976;37.533927,127.073276;37.535278,127.068587;37.536697,127.069225;37.538506,127.070108;37.538904,127.070261;37.539030,127.070192;37.539970,127.070656;37.540200,127.070110;37.540632,127.068837;37.540763,127.068360;37.540815,127.068009;37.542179,127.063963;37.546877,127.066666;37.568707,127.079015;37.569585,127.079457;37.570543,127.079819;37.571689,127.080031;37.571657,127.080609;37.571269,127.080546;37.570962,127.080448;37.571269,127.080546;37.571657,127.080609;37.571347,127.083579;37.570844,127.086154;37.569069,127.086086;37.568402,127.086116;37.566260,127.086448;37.560835,127.087465;37.557747,127.087899;37.553977,127.088567;37.553373,127.088462;37.552926,127.088954;37.552317,127.089403;37.550665,127.090249;37.550361,127.090501;37.550057,127.090833;37.545222,127.085404;37.545086,127.085303;37.543983,127.084819;37.543043,127.084468;37.542084,127.084027;37.539987,127.083204;37.538312,127.083338;37.536566,127.083552;37.536698,127.084342;37.537284,127.086621;37.537222,127.086791;37.537150,127.086860;37.535560,127.087502;37.535616,127.087739;37.536284,127.087755"};
@@ -404,7 +303,9 @@ function init(){
   resize(); addEventListener("resize",resize);
 
   buildUI();
-  LOOPS.forEach(function(L){ state.t[L.id]=0; });
+  rerun();                       /* 시작은 '전체 일정' 이라 차량은 아직 달리지 않습니다 */
+  var pb=document.getElementById("btn-play");
+  pb.disabled=true; pb.title="날짜를 고르면 그 날 동선을 한 번 달립니다";
   fitAll();
   requestAnimationFrame(draw);
 
@@ -634,8 +535,9 @@ function draw(){
     active.forEach(function(L){ screens[L.id]=screenPath(L); });
     active.forEach(function(L){ drawCasing(screens[L.id],w); });
     active.forEach(function(L){ drawRoute(L,screens[L.id],w); });
-    if(state.playing) active.forEach(function(L){
-      state.t[L.id]=(state.t[L.id]+0.00055)%1;
+    /* 차량은 특정 일정을 골랐을 때만, 구청에서 출발해 한 바퀴 돌고 멈춥니다 */
+    if(state.playing&&state.day!=="all") active.forEach(function(L){
+      if(state.t[L.id]<1) state.t[L.id]=Math.min(1,state.t[L.id]+0.00055);
       var c=pathAt(screens[L.id],state.t[L.id]);
       ctx.save(); ctx.translate(c[0],c[1]); ctx.rotate(c[2]);
       ctx.fillStyle="rgba(0,0,0,.18)"; ctx.beginPath(); ctx.ellipse(0,3,13,7,0,0,7); ctx.fill();
@@ -654,7 +556,7 @@ function draw(){
   ctx.fillStyle="#1C2942"; ctx.fill(); ctx.strokeStyle="#fff"; ctx.lineWidth=2.5; ctx.stroke();
 
   // 점검 대상 3D 건물 (가까운 것이 앞에 오도록 y 정렬)
-  hitboxes=[];
+  hitboxes=[]; labelQ=[];
   if(state.show3d){
     var vis=STOPS.filter(function(s){ return state.day==="all"||s.day===state.day; });
     vis.map(function(s){ return {s:s,y:pt(s.lat,s.lon)[1]}; })
@@ -670,6 +572,7 @@ function draw(){
        });
   }
   ctx.globalAlpha=1;
+  drawLabels();
 }
 function roundRect(x,y,w,h,r){
   ctx.beginPath();
@@ -687,14 +590,34 @@ function badge(s,r){
   ctx.fillStyle=col; ctx.fill(); ctx.strokeStyle="#fff"; ctx.lineWidth=2.4; ctx.stroke();
   ctx.fillStyle="#fff"; ctx.font="600 12px 'IBM Plex Sans KR',sans-serif";
   ctx.textAlign="center"; ctx.textBaseline="middle"; ctx.fillText(s.n,x,y+0.5);
-  if(state.sel===s||hover===s){
-    var label=s.name, w=ctx.measureText(label).width+18;
-    ctx.font="500 12.5px 'IBM Plex Sans KR',sans-serif";
-    w=ctx.measureText(label).width+18;
-    ctx.fillStyle="rgba(255,255,255,.96)"; ctx.strokeStyle=col; ctx.lineWidth=1.5;
-    roundRect(x-w/2,y-34,w,20,10); ctx.fill(); ctx.stroke();
-    ctx.fillStyle="#1B2436"; ctx.fillText(label,x,y-23.5);
-  }
+  /* 명칭은 건물을 다 그린 뒤 한 번에 얹습니다 — 뒤에 그려질 건물에 가리지 않도록 */
+  labelQ.push({s:s,x:x,y:y,col:col,forced:(state.sel===s||hover===s)});
+}
+/* 어느 정도 확대되면(LABEL_LEVEL 이하) 명칭이 저절로 나옵니다.
+   선택·마우스오버한 곳은 축척과 상관없이 늘 보여 줍니다. */
+var LABEL_LEVEL=6, labelQ=[];
+function drawLabels(){
+  if(!labelQ.length) return;
+  var showAll=map.getLevel()<=LABEL_LEVEL, placed=[];
+  ctx.font="500 12.5px 'IBM Plex Sans KR',sans-serif";
+  ctx.textAlign="center"; ctx.textBaseline="middle";
+  labelQ.sort(function(a,b){ return (b.forced?1:0)-(a.forced?1:0); })
+        .forEach(function(o){
+    if(!o.forced&&!showAll) return;
+    var w=ctx.measureText(o.s.name).width+18, h=20,
+        x0=o.x-w/2, y0=o.y-34;
+    if(!o.forced){                                  /* 서로 겹치면 뒤엣것을 접습니다 */
+      for(var i=0;i<placed.length;i++){
+        var p=placed[i];
+        if(x0<p.x+p.w+4&&x0+w+4>p.x&&y0<p.y+p.h+3&&y0+h+3>p.y) return;
+      }
+    }
+    placed.push({x:x0,y:y0,w:w,h:h});
+    ctx.fillStyle="rgba(255,255,255,.96)"; ctx.strokeStyle=o.col; ctx.lineWidth=1.5;
+    roundRect(x0,y0,w,h,10); ctx.fill(); ctx.stroke();
+    ctx.fillStyle="#1B2436"; ctx.fillText(o.s.name,o.x,y0+10.5);
+  });
+  labelQ=[];
 }
 function hit(ev){
   var r=cv.getBoundingClientRect(), mx=ev.clientX-r.left, my=ev.clientY-r.top;
@@ -777,7 +700,11 @@ function buildUI(){
   document.getElementById("btn-fit").onclick=function(){ setDay("all"); select(null); fitAll(); };
   tgl("btn-3d",  function(v){ state.show3d=v; });
   tgl("btn-route",function(v){ state.showRoute=v; });
-  tgl("btn-play",function(v){ state.playing=v; if(v) LOOPS.forEach(function(L){ state.t[L.id]=0; }); });
+  tgl("btn-play",function(v){ state.playing=v; if(v) rerun(); });   /* 다시 누르면 처음부터 한 번 더 */
+}
+/* 지금 고른 일정의 동선을 출발선으로 되돌립니다 */
+function rerun(){
+  LOOPS.forEach(function(L){ state.t[L.id]=(state.day!=="all"&&L.day===state.day)?0:1; });
 }
 function tgl(id,fn){
   var b=document.getElementById(id);
@@ -792,6 +719,10 @@ function setDay(id){
     b.setAttribute("aria-pressed",b.dataset.day===id?"true":"false"); });
   [].forEach.call(document.getElementById("list").children,function(n){
     n.style.display=(id==="all"||n.dataset.day===id)?"":"none"; });
+  rerun();                       /* 일정을 고르면 그 날 동선을 처음부터 달립니다 */
+  var pb=document.getElementById("btn-play");
+  pb.disabled=(id==="all");      /* 전체 일정에서는 달릴 동선이 정해지지 않습니다 */
+  pb.title=(id==="all")?"날짜를 고르면 그 날 동선을 한 번 달립니다":"처음부터 다시 달리기";
   var q=pad(); map.setBounds(boundsFor(id),q[0],q[1],q[2],q[3]);
 }
 function select(s,fly){
@@ -1045,166 +976,15 @@ window.__OPENBASE={maps:{
 window.__installOpenBase=function(){ window.kakao=window.__OPENBASE; };
 })();
 
-/* ═══════════════════════════════════════════════════════════════════
+/* ══════════════════════════════════════════════════════════════════
    기반지도 부팅
-   저장된 카카오 JavaScript 키가 있으면 카카오맵으로,
-   없거나 실패하면 일반 지도로 자동 전환합니다. 화면이 비는 일은 없습니다.
-   ═══════════════════════════════════════════════════════════════════ */
+   OpenStreetMap 타일로 바로 엽니다. 카카오 JavaScript SDK 는 쓰지 않습니다
+   (키 발급·도메인 등록이 필요해 공개 배포에 맞지 않았습니다).
+   목록의 '카카오맵 길찾기·로드뷰' 링크는 키가 필요 없어 그대로 동작합니다.
+   ══════════════════════════════════════════════════════════════════ */
 (function(){
-  var STORE="gwangjin_kakao_js_key";
-  var HARDCODED="";      /* ← 여기에 JavaScript 키를 넣어두면 항상 카카오맵으로 열립니다 */
-  var started=false;
-
-  var gate=document.getElementById("gate"),
-      inp=document.getElementById("keyin"),
-      go=document.getElementById("keygo"),
-      err=document.getElementById("keyerr"),
-      baseName=document.getElementById("base-name");
-
-  var isFile=(location.protocol==="file:");
-  var isPreview=/^blob:|^data:/.test(location.href);
-  var origin = isFile ? "file://" : (location.protocol+"//"+location.host);
-  document.getElementById("d-url").textContent=location.href;
-  document.getElementById("d-origin").textContent=origin;
-  var note=document.getElementById("d-note");
-  if(isPreview){
-    note.innerHTML="<b>미리보기 화면입니다.</b> 카카오는 이 주소를 등록할 수 없습니다. "+
-      "파일을 컴퓨터에 내려받아 여세요.";
-  }else if(isFile){
-    note.innerHTML="파일을 직접 열었습니다. 카카오 콘솔이 <b>file://</b> 등록을 거부하면 "+
-      "카카오맵은 이 방식으로 열 수 없고, 지금 보시는 <b>일반 지도</b>를 쓰시면 됩니다.";
-  }else if(/\.github\.io$/i.test(location.hostname)){
-    note.innerHTML="깃허브 페이지입니다. 사이트 도메인에는 <b>"+origin+"</b> <u>만</u> 넣습니다. "+
-      "뒤에 붙는 <code>/저장소이름/</code> 같은 <b>경로는 넣지 않습니다</b> — 경로까지 넣으면 카카오가 거부합니다. "+
-      "저장 후 반영까지 몇 분 걸릴 수 있습니다.";
-  }else{
-    note.innerHTML="포트 번호까지 포함해 위 값 그대로 등록하고 <b>저장</b>을 눌러야 합니다.";
-  }
-
-  /* 등록할 도메인은 글자 하나만 달라도 거부되므로 그대로 복사해 갈 수 있게 합니다 */
-  document.getElementById("d-copy").onclick=function(){
-    var b=this;
-    function done(){ b.textContent="복사됨"; setTimeout(function(){ b.textContent="복사"; },1500); }
-    if(navigator.clipboard&&navigator.clipboard.writeText){
-      navigator.clipboard.writeText(origin).then(done,fallback);
-    }else fallback();
-    function fallback(){
-      var t=document.createElement("textarea");
-      t.value=origin; t.style.cssText="position:fixed;opacity:0";
-      document.body.appendChild(t); t.select();
-      try{ document.execCommand("copy"); done(); }catch(e){}
-      t.remove();
-    }
-  };
-
-  function saved(){ try{ return localStorage.getItem(STORE)||""; }catch(e){ return ""; } }
-  function forget(){ try{ localStorage.removeItem(STORE); }catch(e){} }
-  function start(kind){
-    if(started) return; started=true;
-    baseName.textContent = (kind==="kakao") ? "카카오맵" : "일반";
-    window.__initMap();
-  }
-  function openBase(reason){
-    window.__installOpenBase(); start("open");
-    var bn=document.getElementById("banner"), tx=document.getElementById("banner-tx");
-    if(reason==="failed"){
-      tx.innerHTML="카카오맵을 불러오지 못해 <b>일반 지도</b>로 열었습니다. "+
-        "카카오 콘솔의 <b>플랫폼 &gt; Web</b> 사이트 도메인에 <b>"+origin+"</b> 이 등록돼 있는지 확인해 주세요.";
-    }else{
-      tx.innerHTML="지금은 <b>일반 지도(OpenStreetMap)</b>입니다. 카카오 지도로 보시려면 JavaScript 키를 넣어 주세요.";
-    }
-    bn.hidden=false;
-  }
-
-  /* 카카오는 키가 틀렸을 때도, 도메인이 등록돼 있지 않을 때도 똑같이
-     401(본문 없음) 을 돌려줍니다. 브라우저에서는 둘을 구분할 수 없으므로
-     둘 다 짚어 주고, 확인 순서를 알려 줍니다. */
-  var REJECT_MSG=
-    "카카오가 이 요청을 <b>401 (거부)</b> 로 돌려보냈습니다. "+
-    "<u>키가 틀렸을 때와 도메인이 등록되지 않았을 때 응답이 똑같아서</u> 아래를 차례로 확인해 주세요.<br>"+
-    "<b>1.</b> 콘솔 <b>앱 키</b> 화면의 <b>JavaScript 키</b>인지 — REST API·Admin·네이티브 앱 키는 지도에 쓰이지 않습니다.<br>"+
-    "<b>2.</b> <b>플랫폼 &gt; Web</b> 의 사이트 도메인에 <code>"+origin+"</code> 이 <b>이 글자 그대로</b> 있는지. "+
-    "뒤에 <code>/저장소이름</code> 같은 경로를 붙이면 거부됩니다.<br>"+
-    "<b>3.</b> 방금 저장했다면 몇 분 뒤 새로고침해 보세요.<br>"+
-    "<b>4.</b> 사내망·광고차단이 <b>dapi.kakao.com</b> 을 막고 있지 않은지.";
-
-  /* 지도는 먼저 띄우고, 타일이 끝내 오지 않을 때만 알려 줍니다.
-     (판정이 틀려도 지도를 못 보는 일이 없도록 막지 않습니다) */
-  function watchTiles(){
-    var host=document.getElementById("map"), tries=0;
-    (function look(){
-      var im=host.getElementsByTagName("img"), i;
-      for(i=0;i<im.length;i++) if(im[i].naturalWidth>0) return;   /* 한 장이라도 왔으면 정상 */
-      if(++tries<=20){ setTimeout(look,300); return; }
-      var bn=document.getElementById("banner");
-      document.getElementById("banner-tx").innerHTML=
-        "키는 통과했는데 <b>지도 타일이 오지 않습니다.</b> 카카오 콘솔 <b>플랫폼 &gt; Web</b> 의 "+
-        "사이트 도메인에 <b>"+origin+"</b> 이 등록돼 있는지 확인해 주세요.";
-      bn.hidden=false;
-    })();
-  }
-
-  function tryKakao(key,onFail){
-    var settled=false;
-    var s=document.createElement("script");
-    s.src="https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey="+encodeURIComponent(key);
-    s.onload=function(){
-      if(!window.kakao||!kakao.maps){ settled=true; onFail(REJECT_MSG); return; }
-      kakao.maps.load(function(){
-        settled=true;
-        try{ localStorage.setItem(STORE,key); }catch(e){}
-        gate.hidden=true; start("kakao");
-        watchTiles();
-      });
-    };
-    s.onerror=function(){ settled=true; onFail(REJECT_MSG); };
-    document.head.appendChild(s);
-    setTimeout(function(){ if(!settled) onFail("카카오 지도 응답이 없습니다. 네트워크를 확인해 주세요."); },7000);
-  }
-
-  /* 툴바 · 모달 */
-  var lastFail="";           /* 마지막 실패 사유 — 창을 열 때 그대로 보여 줍니다 */
-  document.getElementById("btn-base").onclick=function(){
-    if(lastFail){ err.innerHTML=lastFail; err.style.display="block"; }
-    else err.style.display="none";
-    gate.hidden=false;
-    inp.value=saved(); setTimeout(function(){ inp.focus(); },50);
-  };
-  document.getElementById("gate-x").onclick=function(){ gate.hidden=true; };
-  document.getElementById("banner-go").onclick=function(){
-    document.getElementById("banner").hidden=true;
-    document.getElementById("btn-base").click();
-  };
-  document.getElementById("banner-x").onclick=function(){
-    document.getElementById("banner").hidden=true;
-  };
-  gate.onclick=function(e){ if(e.target===gate) gate.hidden=true; };
-  go.onclick=function(){
-    var k=inp.value.replace(/\s/g,"");
-    if(!/^[A-Za-z0-9]{20,}$/.test(k)){
-      err.innerHTML="<b>키 형식이 올바르지 않습니다.</b> JavaScript 키는 영문과 숫자로만 이루어진 32자입니다.";
-      err.style.display="block"; return;
-    }
-    err.innerHTML="카카오맵을 불러오는 중…"; err.style.display="block";
-    if(started){ try{ localStorage.setItem(STORE,k); }catch(e){} location.reload(); return; }
-    tryKakao(k,function(msg){ lastFail=msg; err.innerHTML=msg; err.style.display="block"; });
-  };
-  inp.onkeydown=function(e){ if(e.key==="Enter") go.click(); };
-  document.getElementById("keyclear").onclick=function(){
-    forget(); inp.value=""; lastFail="";
-    err.innerHTML="저장된 키를 지웠습니다. 새로고침하면 <b>일반 지도</b>로 열립니다.";
-    err.style.display="block";
-  };
-
-  /* 시작 */
-  var key=HARDCODED||saved();
-  if(key && !isPreview){
-    /* 키는 지우지 않습니다 — 대개 키가 아니라 도메인 문제라, 등록만 하고 새로고침하면 됩니다 */
-    tryKakao(key,function(msg){ lastFail=msg; openBase("failed"); });
-    setTimeout(function(){ if(!started) openBase("failed"); },7500);
-  }else{
-    openBase("none");
-  }
+  window.__installOpenBase();
+  window.__initMap();
 })();
 
 /* ═══════════════════════════════════════════════════════════════════
