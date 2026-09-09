@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>카카오맵 연결 진단</title>
+<style>
+body{margin:0;padding:22px;font-family:"Malgun Gothic","Apple SD Gothic Neo",system-ui,sans-serif;
+ background:#F4F6FA;color:#18202F;font-size:14px;line-height:1.7}
+.card{max-width:640px;margin:0 auto;background:#fff;border:1px solid #E2E7F0;border-radius:14px;padding:24px}
+h1{font-size:18px;margin:0 0 4px}
+.sub{color:#6F7C93;font-size:12.5px;margin:0 0 18px}
+.row{display:flex;gap:8px;margin:14px 0}
+input{flex:1;font:400 13px ui-monospace,monospace;padding:11px 12px;border:1px solid #CFD7E5;border-radius:9px}
+button{font:500 13px inherit;background:#1C2942;color:#fff;border:0;border-radius:9px;padding:11px 18px;cursor:pointer}
+#log{margin-top:16px;font-family:ui-monospace,monospace;font-size:12.5px;background:#0F1725;color:#DDE6F3;
+ border-radius:10px;padding:14px 16px;white-space:pre-wrap;word-break:break-all;min-height:60px}
+.ok{color:#7EE0A8}.ng{color:#FF9A9A}.wa{color:#FFD98A}
+#map{height:260px;margin-top:14px;border:1px solid #E2E7F0;border-radius:10px;background:#EEE}
+.hint{margin-top:16px;font-size:12.5px;color:#3A465C;background:#F4F6FA;border-radius:10px;padding:13px 15px}
+b{font-weight:600}
+</style></head><body>
+<div class="card">
+  <h1>카카오맵 연결 진단</h1>
+  <p class="sub">어느 단계에서 막히는지 확인합니다. JavaScript 키를 넣고 검사를 눌러 주세요.</p>
+  <div class="row">
+    <input id="k" placeholder="JavaScript 키 32자" autocomplete="off" spellcheck="false">
+    <button id="go" type="button">검사</button>
+  </div>
+  <div id="log">대기 중…</div>
+  <div id="map"></div>
+  <div class="hint" id="hint"></div>
+</div>
+<script>
+var log=document.getElementById("log");
+function P(t,c){ log.innerHTML += '\n'+(c?'<span class="'+c+'">'+t+'</span>':t); }
+var origin=location.protocol+"//"+location.host;
+log.textContent="";
+P("현재 주소 : "+location.href);
+P("등록해야 할 도메인 : "+origin, "wa");
+P("(경로 부분은 빼고 위 값만 등록합니다)");
+
+document.getElementById("go").onclick=function(){
+  var key=document.getElementById("k").value.replace(/\s/g,"");
+  log.textContent="";
+  P("현재 주소 : "+location.href);
+  P("등록해야 할 도메인 : "+origin,"wa");
+  if(!/^[A-Za-z0-9]{20,}$/.test(key)){ P("✗ 키 형식이 올바르지 않습니다 (영문+숫자 32자)","ng"); return; }
+  P("1) SDK 스크립트 요청 …");
+  var s=document.createElement("script");
+  s.src="https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey="+encodeURIComponent(key);
+  s.onerror=function(){
+    P("✗ 스크립트를 받지 못했습니다.","ng");
+    P("  → 키가 JavaScript 키가 아니거나(REST API 키 등), 사내망이 dapi.kakao.com 을 막고 있습니다.","ng");
+    document.getElementById("hint").innerHTML="<b>원인 : 키 또는 네트워크</b><br>카카오 개발자 콘솔 > 앱 키 화면에서 <b>JavaScript 키</b> 줄을 다시 복사해 보세요.";
+  };
+  s.onload=function(){
+    if(!window.kakao||!kakao.maps){ P("✗ 스크립트는 받았지만 kakao 객체가 없습니다.","ng"); return; }
+    P("2) 스크립트 수신 OK","ok");
+    kakao.maps.load(function(){
+      P("3) SDK 초기화 OK","ok");
+      try{
+        var m=new kakao.maps.Map(document.getElementById("map"),
+          {center:new kakao.maps.LatLng(37.536284,127.087755), level:4});
+        P("4) 지도 객체 생성 OK","ok");
+        setTimeout(function(){
+          var imgs=document.getElementById("map").querySelectorAll("img"), ok=0;
+          for(var i=0;i<imgs.length;i++) if(imgs[i].naturalWidth>0) ok++;
+          P("5) 타일 이미지 : "+ok+" / "+imgs.length+" 장 로드", ok?"ok":"ng");
+          if(ok){
+            P("\n✔ 정상입니다. 지도가 아래에 보이면 성공입니다.","ok");
+            document.getElementById("hint").innerHTML="<b>연결 성공</b><br>이 키를 동선도 화면에 그대로 넣으시면 됩니다.";
+          }else{
+            P("\n✗ 지도가 회색입니다 — 도메인 미등록입니다.","ng");
+            document.getElementById("hint").innerHTML=
+              "<b>원인 : 사이트 도메인 미등록</b><br>카카오 개발자 콘솔 &gt; 내 애플리케이션 &gt; (앱 선택) &gt; "+
+              "왼쪽 <b>플랫폼</b> &gt; <b>Web</b> 의 사이트 도메인 목록에 <b>"+origin+"</b> 이 정확히 들어 있는지, "+
+              "그리고 <b>저장</b>을 눌렀는지 확인해 주세요. 목록에 이미 있다면 한 번 삭제 후 다시 등록해 보세요.";
+          }
+        },3500);
+      }catch(e){ P("✗ 지도 생성 실패 : "+e.message,"ng"); }
+    });
+  };
+  document.head.appendChild(s);
+};
+</script>
+</body></html>
