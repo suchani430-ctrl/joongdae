@@ -76,12 +76,12 @@ body{margin:0;font-family:var(--sans);font-weight:300;color:var(--ink);backgroun
 .navbtn{margin-left:auto;font-size:11px;text-decoration:none;color:#3B2A00;background:#FFE55C;
   border:1px solid #F2CE1B;border-radius:7px;padding:4px 9px;white-space:nowrap;font-weight:500}
 .navbtn:hover{background:#FFDC1F}
-.links a.go{background:#FFE55C;border-color:#F2CE1B;color:#3B2A00;font-weight:500}
-.links a.go:hover{background:#FFDC1F}
+.stop .navbtn{align-self:flex-start;margin-top:1px}   /* 상세를 펼쳐도 첫 줄에 붙어 있게 */
 .links{flex-wrap:wrap}
 .partrow .meta{font-family:var(--mono);font-size:10.5px;color:var(--faint)}
 
-.stop{display:flex;gap:11px;padding:8px 22px;cursor:pointer;border-left:3px solid transparent}
+.stop{display:flex;flex-wrap:wrap;gap:11px;padding:8px 22px;cursor:pointer;border-left:3px solid transparent}
+.stop .body{flex:1 1 auto;min-width:0}
 .stop:hover{background:var(--bg-2)}
 .stop.on{background:#EEF3FC;border-left-color:var(--acc)}
 .stop:focus-visible{outline:2px solid #4E7BD6;outline-offset:-2px}
@@ -91,7 +91,7 @@ body{margin:0;font-family:var(--sans);font-weight:300;color:var(--ink);backgroun
 .stop .mt{font-family:var(--mono);font-size:10.5px;color:var(--mut);margin-top:2px}
 .stop .tag{font-family:var(--sans);font-size:10px;background:#E8EDF6;color:var(--ink-2);
   padding:1px 6px;border-radius:4px;margin:0 3px}
-.detail{display:none;margin-top:9px;padding:11px 12px;background:var(--bg-2);border:1px solid var(--line);
+.detail{display:none;flex:0 0 100%;width:100%;margin-top:0;padding:11px 12px;background:var(--bg-2);border:1px solid var(--line);
   border-radius:9px;font-size:12px;color:var(--ink-2);line-height:1.6}
 .stop.on .detail{display:block}
 .detail dl{margin:0;display:grid;grid-template-columns:48px 1fr;gap:3px 10px}
@@ -155,6 +155,7 @@ body{margin:0;font-family:var(--sans);font-weight:300;color:var(--ink);backgroun
   #railfoot{display:none}      /* 좁은 화면에서는 자리만 먹어 숨깁니다 (PC 에서는 그대로) */
   .links{gap:7px}
   .links a,.navbtn{padding:9px 12px;font-size:12px}
+  .stop .navbtn{padding:7px 9px;font-size:11px}   /* 좁은 화면에서 이름 칸을 덜 뺏도록 */
   .detail dl{grid-template-columns:44px 1fr}
 }
 </style>
@@ -256,12 +257,6 @@ var STOPS=[
   road:"동일로 458",jibun:"중곡동 587-8",mgr:"",tel:"내선 7543",kid:9457643,lat:37.570970,lon:127.080275,fl:2,w:21,d:16}
 ];
 
-/* 카카오 길찾기 URL용 좌표(WCONGNAMUL) */
-var WC={ depot:"519390,1121337",
- 1:"519235,1127734", 2:"519869,1124358", 3:"522271,1123895", 4:"521444,1122665", 5:"521321,1121407",
- 6:"518654,1119272", 7:"516057,1126408", 8:"518106,1126127", 9:"517654,1121315", 10:"514098,1121162",
- 11:"515767,1124162", 12:"518135,1123740", 13:"519390,1121337", 14:"515562,1121752", 15:"517729,1130960" };
-
 /* 카카오 길찾기(자동차) 실제 주행 경로 — 광진구청 출발·복귀 순환 */
 var LOOPS=[
  {id:"d1am",day:"d1",part:"am",time:"38분",dist:"7.9km"},
@@ -273,11 +268,6 @@ var LOOPS=[
 ];
 LOOPS.forEach(function(L){
   L.path = ROUTE_RAW[L.id].split(";").map(function(s){ var a=s.split(","); return [+a[0],+a[1]]; });
-  var seq=[WC.depot];
-  STOPS.forEach(function(s){ if(s.day===L.day&&s.part===L.part&&WC[s.n]!==WC.depot) seq.push(WC[s.n]); });
-  seq.push(WC.depot);
-  L.navUrl="https://map.kakao.com/?map_type=TYPE_MAP&target=car&rt="+seq.join(",")+
-    "&rt1="+encodeURIComponent("광진구청")+"&rt2="+encodeURIComponent("광진구청");
   var d=DAYS.filter(function(x){return x.id===L.day;})[0];
   L.color = L.part==="am" ? d.color : mix(d.color,"#FFFFFF",0.42);
   L.dayObj=d;
@@ -636,6 +626,7 @@ function onCanvasMove(ev){ var s=hit(ev); hover=s;
 /* ───────────────────────────── UI ───────────────────────────── */
 function kPlace(s){ return "https://place.map.kakao.com/"+s.kid; }
 function kRoad(s){ return "https://map.kakao.com/link/roadview/"+s.lat+","+s.lon; }
+function kTo(s){ return "https://map.kakao.com/link/to/"+encodeURIComponent(s.kname)+","+s.lat+","+s.lon; }
 var stopEls={};
 function buildUI(){
   var chips=document.getElementById("days");
@@ -666,9 +657,7 @@ function buildUI(){
       if(!sub.length) return;
       var L=LOOPS.filter(function(x){ return x.day===d.id&&x.part===part; })[0];
       var ph=document.createElement("div"); ph.className="partrow"; ph.dataset.day=d.id;
-      ph.innerHTML='<div class="prow"><b>'+(part==="am"?"오전":"오후")+' 순회</b>'+
-        '<a class="navbtn" href="'+L.navUrl+'" target="_blank" rel="noopener" '+
-        'title="카카오맵 길찾기로 이 순회 전체를 엽니다">카카오맵 길찾기 ↗</a></div>'+
+      ph.innerHTML='<div class="prow"><b>'+(part==="am"?"오전":"오후")+' 순회</b></div>'+
         '<span class="meta">광진구청 출발·복귀 · '+L.dist+' · 약 '+L.time+'</span>';
       list.appendChild(ph);
       sub.forEach(function(s){
@@ -677,7 +666,10 @@ function buildUI(){
         e.className="stop"; e.tabIndex=0; e.dataset.day=d.id;
         e.innerHTML='<span class="num" style="background:'+col+'">'+s.n+'</span>'+
           '<div class="body"><div class="nm">'+s.name+'</div>'+
-          '<div class="mt">'+s.time+' <span class="tag">'+s.type+'</span> '+s.dept+'</div>'+
+          '<div class="mt">'+s.time+' <span class="tag">'+s.type+'</span> '+s.dept+'</div></div>'+
+          '<a class="navbtn" href="'+kTo(s)+'" target="_blank" rel="noopener" '+
+          'title="'+s.name+' 까지 카카오맵 길찾기">카카오맵 길찾기 ↗</a>'+
+          /* 상세는 버튼 아래 한 줄을 통째로 씁니다 — 좁아지면 표가 눌립니다 */
           '<div class="detail">'+
             '<dl><dt>도로명</dt><dd>서울 광진구 '+s.road+'</dd>'+
             '<dt>지번</dt><dd>'+s.jibun+'</dd>'+
@@ -687,9 +679,8 @@ function buildUI(){
             '<div class="links">'+
               '<a href="'+kPlace(s)+'" target="_blank" rel="noopener">건물 사진 ↗</a>'+
               '<a href="'+kRoad(s)+'" target="_blank" rel="noopener">로드뷰 ↗</a>'+
-              '<a class="go" href="https://map.kakao.com/link/to/'+encodeURIComponent(s.kname)+","+s.lat+","+s.lon+'" target="_blank" rel="noopener">여기로 길찾기 ↗</a>'+
             '</div>'+
-          '</div></div>';
+          '</div>';
         e.onclick=function(ev){ if(ev.target.closest("a")) return; select(s,true); };
         e.onkeydown=function(ev){ if(ev.key==="Enter"){ select(s,true); } };
         list.appendChild(e); stopEls[s.n]=e;
